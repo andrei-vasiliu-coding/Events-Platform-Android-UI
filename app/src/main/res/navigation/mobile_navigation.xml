@@ -8,18 +8,18 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.jveventsplatform.eventsplatformandroidui.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="Home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.jveventsplatform.eventsplatformandroidui.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_my_events"
+        android:name="com.jveventsplatform.eventsplatformandroidui.ui.myevents.MyEventsFragment"
+        android:label="My Events"
+        tools:layout="@layout/fragment_myevents" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.jveventsplatform.eventsplatformandroidui.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_profile"
+        android:name="com.jveventsplatform.eventsplatformandroidui.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
