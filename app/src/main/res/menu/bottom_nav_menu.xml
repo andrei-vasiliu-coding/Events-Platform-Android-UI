@@ -7,7 +7,7 @@
     <item
         android:id="@+id/navigation_my_events"
         android:title="My Events"
-        android:icon="@drawable/ic_my_events" />
+        android:icon="@drawable/ic_myevents" />
 
     <item
         android:id="@+id/navigation_profile"
