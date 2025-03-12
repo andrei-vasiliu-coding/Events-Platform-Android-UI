@@ -6,11 +6,16 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jveventsplatform.eventsplatformandroidui.databinding.FragmentHomeBinding
 import com.jveventsplatform.eventsplatformandroidui.model.Event
+import com.jveventsplatform.eventsplatformandroidui.network.RetrofitClient
 import com.jveventsplatform.eventsplatformandroidui.ui.adapters.EventAdapter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeFragment : Fragment() {
 
@@ -18,13 +23,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var eventAdapter: EventAdapter
-    private var eventList: List<Event> = listOf( // Sample data, replace with real API data
-        Event("Lady Gaga Concert", "01-07-2025"),
-        Event("Tech Conference 2025", "15-08-2025"),
-        Event("Yoga Meetup", "10-09-2025"),
-        Event("Jazz Night", "20-09-2025"),
-        Event("Art Festival", "05-10-2025")
-    )
+    private var eventList: MutableList<Event> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,10 +33,8 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // Set up RecyclerView
         setupRecyclerView()
-
-        // Set up search functionality
+        fetchEvents()
         setupSearchBar()
 
         return root
@@ -47,6 +44,24 @@ class HomeFragment : Fragment() {
         eventAdapter = EventAdapter(eventList)
         binding.recyclerViewEvents.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewEvents.adapter = eventAdapter
+    }
+
+    private fun fetchEvents() {
+        RetrofitClient.apiService.getEvents().enqueue(object : Callback<List<Event>> {
+            override fun onResponse(call: Call<List<Event>>, response: Response<List<Event>>) {
+                if (response.isSuccessful) {
+                    eventList.clear()
+                    eventList.addAll(response.body() ?: emptyList())
+                    eventAdapter.notifyDataSetChanged()
+                } else {
+                    Toast.makeText(requireContext(), "Failed to fetch events", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<Event>>, t: Throwable) {
+                Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     private fun setupSearchBar() {
