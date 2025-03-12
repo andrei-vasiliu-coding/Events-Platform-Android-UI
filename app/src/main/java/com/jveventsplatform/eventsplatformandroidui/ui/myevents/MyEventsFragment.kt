@@ -1,4 +1,4 @@
-package com.jveventsplatform.eventsplatformandroidui.ui.myEvents
+package com.jveventsplatform.eventsplatformandroidui.ui.myevents
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jveventsplatform.eventsplatformandroidui.databinding.FragmentHomeBinding
 import com.jveventsplatform.eventsplatformandroidui.model.Event
@@ -22,7 +21,9 @@ class HomeFragment : Fragment() {
     private var eventList: List<Event> = listOf( // Sample data, replace with real API data
         Event("Lady Gaga Concert", "01-07-2025"),
         Event("Tech Conference 2025", "15-08-2025"),
-        Event("Yoga Meetup", "10-09-2025")
+        Event("Yoga Meetup", "10-09-2025"),
+        Event("Jazz Night", "20-09-2025"),
+        Event("Art Festival", "05-10-2025")
     )
 
     override fun onCreateView(
@@ -30,16 +31,25 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         // Set up RecyclerView
+        setupRecyclerView()
+
+        // Set up search functionality
+        setupSearchBar()
+
+        return root
+    }
+
+    private fun setupRecyclerView() {
         eventAdapter = EventAdapter(eventList)
         binding.recyclerViewEvents.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewEvents.adapter = eventAdapter
+    }
 
-        // Search Bar Functionality
+    private fun setupSearchBar() {
         binding.searchBar.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -52,8 +62,6 @@ class HomeFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable?) {}
         })
-
-        return root
     }
 
     override fun onDestroyView() {
