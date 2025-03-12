@@ -33,6 +33,10 @@
         <argument
             android:name="event"
             app:argType="com.jveventsplatform.eventsplatformandroidui.ui.model.Event" />
+        <action
+            android:id="@+id/action_eventDetails_to_home"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

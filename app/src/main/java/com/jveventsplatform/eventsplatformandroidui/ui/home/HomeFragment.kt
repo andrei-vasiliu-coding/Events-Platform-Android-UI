@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
             val bundle = Bundle().apply {
                 putParcelable("event", event)
             }
-            findNavController().navigate(R.id.action_home_to_eventDetails, bundle)
+            findNavController().navigate(R.id.action_home_to_eventDetails, bundle, null, null)
         }
         binding.recyclerViewEvents.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewEvents.adapter = eventAdapter
