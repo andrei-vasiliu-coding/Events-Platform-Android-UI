@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jveventsplatform.eventsplatformandroidui.R
 import com.jveventsplatform.eventsplatformandroidui.ui.model.Event
 
-class EventAdapter(private var eventList: List<Event>) :
-    RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
+class EventAdapter(
+    private var eventList: List<Event>,
+    private val onEventClick: (Event) -> Unit // Callback for item clicks
+) : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
     // ViewHolder: Defines how a single item looks
     class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -27,6 +29,11 @@ class EventAdapter(private var eventList: List<Event>) :
         val event = eventList[position]
         holder.eventTitle.text = event.title
         holder.eventDate.text = event.eventDate
+
+        // Set the click listener for the item
+        holder.itemView.setOnClickListener {
+            onEventClick(event)
+        }
     }
 
     override fun getItemCount(): Int = eventList.size

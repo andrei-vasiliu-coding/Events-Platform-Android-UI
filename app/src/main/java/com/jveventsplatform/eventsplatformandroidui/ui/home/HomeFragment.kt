@@ -16,6 +16,8 @@ import com.jveventsplatform.eventsplatformandroidui.ui.adapters.EventAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import androidx.navigation.fragment.findNavController
+import com.jveventsplatform.eventsplatformandroidui.R
 
 class HomeFragment : Fragment() {
 
@@ -41,10 +43,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        eventAdapter = EventAdapter(eventList)
+        eventAdapter = EventAdapter(eventList) { event ->
+            // Handle the event click
+            val bundle = Bundle().apply {
+                putParcelable("event", event)
+            }
+            findNavController().navigate(R.id.action_home_to_eventDetails, bundle)
+        }
         binding.recyclerViewEvents.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewEvents.adapter = eventAdapter
     }
+
 
     private fun fetchEvents() {
         RetrofitClient.apiService.getEvents().enqueue(object : Callback<List<Event>> {

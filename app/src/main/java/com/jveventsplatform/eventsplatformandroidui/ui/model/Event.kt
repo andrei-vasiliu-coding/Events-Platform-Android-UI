@@ -2,7 +2,10 @@ package com.jveventsplatform.eventsplatformandroidui.ui.model
 
 import com.jveventsplatform.eventsplatformandroidui.ui.model.Location
 import com.jveventsplatform.eventsplatformandroidui.ui.model.Organiser
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Event(
     val id: Long,
     val title: String,
@@ -14,4 +17,4 @@ data class Event(
     val price: String,
     val location: Location,
     val organiser: Organiser
-)
+) : Parcelable
