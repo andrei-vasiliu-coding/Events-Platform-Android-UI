@@ -1,4 +1,4 @@
-package com.jveventsplatform.eventsplatformandroidui.model
+package com.jveventsplatform.eventsplatformandroidui.ui.model
 
 data class Organiser(
     val id: Long,

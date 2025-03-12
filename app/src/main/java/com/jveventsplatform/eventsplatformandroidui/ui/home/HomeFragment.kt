@@ -10,8 +10,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jveventsplatform.eventsplatformandroidui.databinding.FragmentHomeBinding
-import com.jveventsplatform.eventsplatformandroidui.model.Event
-import com.jveventsplatform.eventsplatformandroidui.network.RetrofitClient
+import com.jveventsplatform.eventsplatformandroidui.ui.model.Event
+import com.jveventsplatform.eventsplatformandroidui.ui.network.RetrofitClient
 import com.jveventsplatform.eventsplatformandroidui.ui.adapters.EventAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -50,19 +50,27 @@ class HomeFragment : Fragment() {
         RetrofitClient.apiService.getEvents().enqueue(object : Callback<List<Event>> {
             override fun onResponse(call: Call<List<Event>>, response: Response<List<Event>>) {
                 if (response.isSuccessful) {
-                    eventList.clear()
-                    eventList.addAll(response.body() ?: emptyList())
-                    eventAdapter.notifyDataSetChanged()
+                    val events = response.body()
+                    if (events != null) {
+                        eventList.clear()
+                        eventList.addAll(events)
+                        eventAdapter.notifyDataSetChanged()
+                        println("API Response: $events") // Debugging log
+                    } else {
+                        Toast.makeText(requireContext(), "No events found", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
-                    Toast.makeText(requireContext(), "Failed to fetch events", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Failed to fetch events: ${response.code()}", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<List<Event>>, t: Throwable) {
-                Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "API Error: ${t.message}", Toast.LENGTH_LONG).show()
+                println("API Call Failure: ${t.message}") // Debugging log
             }
         })
     }
+
 
     private fun setupSearchBar() {
         binding.searchBar.addTextChangedListener(object : TextWatcher {

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jveventsplatform.eventsplatformandroidui.R
-import com.jveventsplatform.eventsplatformandroidui.model.Event
+import com.jveventsplatform.eventsplatformandroidui.ui.model.Event
 
 class EventAdapter(private var eventList: List<Event>) :
     RecyclerView.Adapter<EventAdapter.EventViewHolder>() {

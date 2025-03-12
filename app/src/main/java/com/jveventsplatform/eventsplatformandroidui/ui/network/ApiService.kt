@@ -1,6 +1,6 @@
-package com.jveventsplatform.eventsplatformandroidui.network
+package com.jveventsplatform.eventsplatformandroidui.ui.network
 
-import com.jveventsplatform.eventsplatformandroidui.model.Event
+import com.jveventsplatform.eventsplatformandroidui.ui.model.Event
 import retrofit2.Call
 import retrofit2.http.GET
 

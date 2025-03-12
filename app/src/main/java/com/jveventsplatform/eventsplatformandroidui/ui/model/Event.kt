@@ -1,4 +1,7 @@
-package com.jveventsplatform.eventsplatformandroidui.model
+package com.jveventsplatform.eventsplatformandroidui.ui.model
+
+import com.jveventsplatform.eventsplatformandroidui.ui.model.Location
+import com.jveventsplatform.eventsplatformandroidui.ui.model.Organiser
 
 data class Event(
     val id: Long,

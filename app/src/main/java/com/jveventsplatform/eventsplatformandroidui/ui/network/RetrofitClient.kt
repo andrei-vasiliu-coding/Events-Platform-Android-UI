@@ -1,4 +1,4 @@
-package com.jveventsplatform.eventsplatformandroidui.network
+package com.jveventsplatform.eventsplatformandroidui.ui.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
