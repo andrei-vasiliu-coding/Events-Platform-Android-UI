@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "276615180301",
+    "project_id": "jv-events-platform-34d7b",
+    "storage_bucket": "jv-events-platform-34d7b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276615180301:android:bf96f461285e14227e6544",
+        "android_client_info": {
+          "package_name": "com.jveventsplatform.eventsplatformandroidui"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcdQv824KONIiFWigXh-JmFPLb6uCAbmQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
