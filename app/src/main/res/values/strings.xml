@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Events Platform Android UI</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="default_web_client_id">357807472253-82mr5f0uku9od3q7tma9g6un07p5v57q.apps.googleusercontent.com</string>
 </resources>

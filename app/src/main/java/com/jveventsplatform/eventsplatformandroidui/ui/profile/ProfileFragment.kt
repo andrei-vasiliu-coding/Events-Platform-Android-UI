@@ -20,41 +20,43 @@ class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var auth: FirebaseAuth
-    private val RC_SIGN_IN = 1001
+
+    companion object {
+        private const val RC_SIGN_IN = 1001
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val profileViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
-
+        val profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // Initialize Firebase Auth
-        auth = FirebaseAuth.getInstance()
-
-        // Setup click listener for the sign-in button
-        binding.signInButton.setOnClickListener {
-            signInWithGoogle()
-        }
-
-        // Optionally, observe view model data for other profile info
+        // Observe profile data (if any)
         profileViewModel.text.observe(viewLifecycleOwner) {
             binding.textNotifications.text = it
         }
-
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // Initialize Firebase Auth
+        auth = FirebaseAuth.getInstance()
+
+        // Set click listener on the sign-in button
+        binding.signInButton.setOnClickListener {
+            signInWithGoogle()
+        }
     }
 
     private fun signInWithGoogle() {
         // Configure Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id)) // Ensure this string resource is defined
+            .requestIdToken(getString(R.string.default_web_client_id)) // Ensure this resource is defined in strings.xml
             .requestEmail()
             .build()
 
@@ -86,7 +88,7 @@ class ProfileFragment : Fragment() {
                     val user = auth.currentUser
                     Log.d("Firebase Auth", "signInWithCredential:success, user: ${user?.email}")
                     Toast.makeText(requireContext(), "Welcome ${user?.displayName}", Toast.LENGTH_SHORT).show()
-                    // Optionally update UI with user's info
+                    // Optionally update UI or navigate to another screen
                 } else {
                     Log.w("Firebase Auth", "signInWithCredential:failure", task.exception)
                     Toast.makeText(requireContext(), "Firebase Authentication failed.", Toast.LENGTH_SHORT).show()
