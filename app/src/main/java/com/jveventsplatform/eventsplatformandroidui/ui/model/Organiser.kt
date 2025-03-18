@@ -5,8 +5,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Organiser(
-    val id: Long,
-    val name: String,
-    val email: String,
-    val phoneNumber: String
+    val id: Long = 0,
+    val name: String = "",
+    val email: String = "",
+    val phoneNumber: String = ""
 ) : Parcelable

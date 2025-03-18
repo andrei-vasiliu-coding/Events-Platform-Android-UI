@@ -53,4 +53,11 @@
         android:clickable="true"
         android:focusable="true" />
 
+    <Button
+        android:id="@+id/signUpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up for Event"
+        android:layout_marginTop="16dp"/>
+
 </LinearLayout>
