@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.jveventsplatform.eventsplatformandroidui.R
 import com.jveventsplatform.eventsplatformandroidui.databinding.FragmentMyeventsBinding
 import com.jveventsplatform.eventsplatformandroidui.ui.adapters.EventAdapter
 import com.jveventsplatform.eventsplatformandroidui.ui.model.Event
@@ -25,8 +27,7 @@ class MyEventsFragment : Fragment() {
     private val auth by lazy { FirebaseAuth.getInstance() }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMyeventsBinding.inflate(inflater, container, false)
@@ -40,8 +41,13 @@ class MyEventsFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
+        // Set up the adapter with a click listener that navigates to EventDetailFragment
         eventAdapter = EventAdapter(eventList) { event ->
-            // Optionally handle event item clicks here
+            val bundle = Bundle().apply {
+                putParcelable("event", event)
+            }
+            // Navigate to EventDetailFragment using its destination id
+            findNavController().navigate(R.id.eventDetailFragment, bundle)
         }
         binding.recyclerViewMyEvents.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewMyEvents.adapter = eventAdapter
@@ -54,7 +60,6 @@ class MyEventsFragment : Fragment() {
             return
         }
 
-        // Log the UID of the logged-in user
         Log.d("MyEventsFragment", "Current user UID: ${currentUser.uid}")
 
         firestore.collection("user_signups")
