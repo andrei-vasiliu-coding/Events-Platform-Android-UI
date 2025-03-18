@@ -15,7 +15,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -38,10 +37,14 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    packaging {
+        resources {
+            excludes += "META-INF/DEPENDENCIES"
+        }
+    }
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -59,8 +62,9 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.play.services.auth)
     implementation(platform(libs.firebase.bom))
-    // Add other Firebase dependencies without specifying versions
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.analytics)
+    implementation(libs.googleApiCalendar)
+    implementation(libs.googleHttpClientAndroid)
 }
