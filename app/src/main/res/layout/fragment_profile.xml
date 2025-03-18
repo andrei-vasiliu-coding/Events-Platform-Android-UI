@@ -9,7 +9,7 @@
 
     <!-- Existing TextView for profile information -->
     <TextView
-        android:id="@+id/text_notifications"
+        android:id="@+id/text_profile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Profile Info"
