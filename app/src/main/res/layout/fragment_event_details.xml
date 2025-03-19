@@ -60,4 +60,12 @@
         android:text="Sign Up for Event"
         android:layout_marginTop="16dp"/>
 
+    <Button
+        android:id="@+id/addToCalendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add to Calendar"
+        android:layout_marginTop="16dp"/>
+
+
 </LinearLayout>
