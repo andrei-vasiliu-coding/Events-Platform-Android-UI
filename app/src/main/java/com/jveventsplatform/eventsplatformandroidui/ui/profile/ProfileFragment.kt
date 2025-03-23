@@ -29,7 +29,8 @@ class ProfileFragment : Fragment() {
     private val RC_SIGN_IN = 1001
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
@@ -45,8 +46,11 @@ class ProfileFragment : Fragment() {
             signInWithGoogle()
         }
 
-        // Check admin role to update the Admin Panel button visibility
-        checkAdminRole()
+        // Check the user's role and update the Admin Panel button visibility
+        checkUserRole { role ->
+            binding.adminPanelButton.visibility =
+                if (role == "admin") View.VISIBLE else View.GONE
+        }
 
         updateUI()
     }
@@ -99,12 +103,16 @@ class ProfileFragment : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-                    Log.d("Firebase Auth", "signInWithCredential:success, user: ${user?.email}")
+                    Log.d("Firebase Auth", "signInWithCredential: success, user: ${user?.email}")
                     Toast.makeText(requireContext(), "Welcome ${user?.displayName}", Toast.LENGTH_SHORT).show()
                     ensureUserDocumentExists()
-                    checkAdminRole() // re-check role after sign-in
+                    // Re-check the user role after sign-in
+                    checkUserRole { role ->
+                        binding.adminPanelButton.visibility =
+                            if (role == "admin") View.VISIBLE else View.GONE
+                    }
                 } else {
-                    Log.w("Firebase Auth", "signInWithCredential:failure", task.exception)
+                    Log.w("Firebase Auth", "signInWithCredential: failure", task.exception)
                     Toast.makeText(requireContext(), "Firebase Authentication failed.", Toast.LENGTH_SHORT).show()
                 }
                 updateUI()
@@ -132,26 +140,23 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun checkAdminRole() {
+    // Helper function to check the user's role
+    private fun checkUserRole(onRoleFetched: (String) -> Unit) {
         val user = auth.currentUser
-        if (user == null) {
-            binding.adminPanelButton.visibility = View.GONE
-            return
-        }
-        firestore.collection("users").document(user.uid)
-            .get()
-            .addOnSuccessListener { document ->
-                val role = document.getString("role") ?: "user"
-                if (role == "admin") {
-                    binding.adminPanelButton.visibility = View.VISIBLE
-                } else {
-                    binding.adminPanelButton.visibility = View.GONE
+        if (user != null) {
+            firestore.collection("users").document(user.uid)
+                .get()
+                .addOnSuccessListener { document ->
+                    val role = document.getString("role") ?: "user"
+                    onRoleFetched(role)
                 }
-            }
-            .addOnFailureListener { e ->
-                Log.e("ProfileFragment", "Error checking admin role", e)
-                binding.adminPanelButton.visibility = View.GONE
-            }
+                .addOnFailureListener { e ->
+                    Log.e("ProfileFragment", "Error checking user role", e)
+                    onRoleFetched("user")
+                }
+        } else {
+            onRoleFetched("user")
+        }
     }
 
     override fun onDestroyView() {
