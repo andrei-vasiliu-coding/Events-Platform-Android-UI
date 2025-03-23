@@ -46,6 +46,10 @@ class ProfileFragment : Fragment() {
             signInWithGoogle()
         }
 
+        binding.signOutButton.setOnClickListener {
+            signOut()
+        }
+
         // Check the user's role and update the Admin Panel button visibility
         checkUserRole { role ->
             binding.adminPanelButton.visibility =
@@ -106,7 +110,7 @@ class ProfileFragment : Fragment() {
                     Log.d("Firebase Auth", "signInWithCredential: success, user: ${user?.email}")
                     Toast.makeText(requireContext(), "Welcome ${user?.displayName}", Toast.LENGTH_SHORT).show()
                     ensureUserDocumentExists()
-                    // Re-check the user role after sign-in
+                    // Re-check user role after sign-in
                     checkUserRole { role ->
                         binding.adminPanelButton.visibility =
                             if (role == "admin") View.VISIBLE else View.GONE
@@ -148,6 +152,7 @@ class ProfileFragment : Fragment() {
                 .get()
                 .addOnSuccessListener { document ->
                     val role = document.getString("role") ?: "user"
+                    Log.d("ProfileFragment", "User role: $role")
                     onRoleFetched(role)
                 }
                 .addOnFailureListener { e ->
@@ -157,6 +162,21 @@ class ProfileFragment : Fragment() {
         } else {
             onRoleFetched("user")
         }
+    }
+
+    // Sign out function to log out the user
+    private fun signOut() {
+        // Sign out from Firebase Auth
+        auth.signOut()
+
+        // Optionally, sign out from Google as well:
+        val googleSignInClient = GoogleSignIn.getClient(requireActivity(),
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build())
+        googleSignInClient.signOut()
+
+        // Update the UI after sign-out
+        updateUI()
+        Toast.makeText(requireContext(), "Signed out", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
