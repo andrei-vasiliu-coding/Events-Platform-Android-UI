@@ -1,13 +1,17 @@
 package com.jveventsplatform.eventsplatformandroidui.ui.admin
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.jveventsplatform.eventsplatformandroidui.databinding.FragmentAddEventBinding
 import com.jveventsplatform.eventsplatformandroidui.ui.model.Event
+import com.jveventsplatform.eventsplatformandroidui.ui.model.Location
+import com.jveventsplatform.eventsplatformandroidui.ui.model.Organiser
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,37 +34,45 @@ class AddEventFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonSubmitEvent.setOnClickListener {
-            // Collect data from form
             val title = binding.editTextTitle.text.toString().trim()
             val description = binding.editTextDescription.text.toString().trim()
+            val type = binding.editTextType.text.toString().trim()  // Must be one of the valid enum values, e.g., "Concert"
             val date = binding.editTextDate.text.toString().trim()
             val startTime = binding.editTextStartTime.text.toString().trim()
             val endTime = binding.editTextEndTime.text.toString().trim()
-            val locationName = binding.editTextLocation.text.toString().trim()
+            val price = binding.editTextPrice.text.toString().trim()
+
+            val locationName = binding.editTextLocationName.text.toString().trim()
+            val locationAddress = binding.editTextLocationAddress.text.toString().trim()
+            val locationCity = binding.editTextLocationCity.text.toString().trim()
+            val locationPostcode = binding.editTextLocationPostcode.text.toString().trim()
+
+            val organiserName = binding.editTextOrganiserName.text.toString().trim()
+            val organiserEmail = binding.editTextOrganiserEmail.text.toString().trim()
+            val organiserPhone = binding.editTextOrganiserPhone.text.toString().trim()
 
             // You need to construct your Event object.
-            // Here, we assume Event has an appropriate constructor and that you provide default values for other fields.
             val newEvent = Event(
-                id = 0,  // If your backend generates an ID, you can leave this as 0 or null.
+                id = null,  // <-- Important: set to null, not 0
                 title = title,
                 description = description,
-                type = "",  // Set type if needed.
+                type = type,  // Set type if needed.
                 eventDate = date,
                 startTime = startTime,
                 endTime = endTime,
-                price = "", // Set price if needed.
-                location = com.jveventsplatform.eventsplatformandroidui.ui.model.Location(
-                    id = 0,
+                price = price, // Set price if needed.
+                location = Location(
+                    id = null, // Also make location id nullable if needed
                     name = locationName,
-                    address = "",
-                    city = "",
-                    postcode = ""
+                    address = locationAddress,
+                    city = locationCity,
+                    postcode = locationPostcode
                 ),
-                organiser = com.jveventsplatform.eventsplatformandroidui.ui.model.Organiser(
-                    id = 0,
-                    name = "",
-                    email = "",
-                    phoneNumber = ""
+                organiser = Organiser(
+                    id = null, // Also make organiser id nullable if needed
+                    name = organiserName,
+                    email = organiserEmail,
+                    phoneNumber = organiserPhone
                 )
             )
 
@@ -71,13 +83,17 @@ class AddEventFragment : Fragment() {
                         if (response.isSuccessful) {
                             Toast.makeText(requireContext(), "Event created!", Toast.LENGTH_SHORT).show()
                             // Navigate back or clear the form as needed
+                            findNavController().popBackStack()
+                            // Alternatively, if you want to navigate directly to ProfileFragment, you could use:
+                            // findNavController().navigate(R.id.navigation_profile)
                         } else {
+                            val errorResponse = response.errorBody()?.string()
                             Toast.makeText(requireContext(), "Failed to create event", Toast.LENGTH_SHORT).show()
-                        }
+                            Log.e("AddEventFragment", "Error creating event: $errorResponse")                        }
                     }
                     override fun onFailure(call: Call<Event>, t: Throwable) {
                         Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
-                    }
+                        Log.e("AddEventFragment", "Error: ", t)                    }
                 })
         }
     }

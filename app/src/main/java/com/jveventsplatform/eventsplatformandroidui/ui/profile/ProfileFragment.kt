@@ -50,6 +50,19 @@ class ProfileFragment : Fragment() {
             signOut()
         }
 
+        // Set click listener for the admin panel button.
+        binding.adminPanelButton.setOnClickListener {
+            // Check the user's role when the button is clicked.
+            checkUserRole { role ->
+                if (role == "admin") {
+                    // Navigate to AdminFragment (ensure it's defined in your navigation graph with ID adminFragment)
+                    findNavController().navigate(R.id.adminFragment)
+                } else {
+                    Toast.makeText(requireContext(), "You are not an admin", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         // Check the user's role and update the Admin Panel button visibility
         checkUserRole { role ->
             binding.adminPanelButton.visibility =
@@ -62,6 +75,12 @@ class ProfileFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         updateUI()
+        // Ensure the user document exists even if the user was already signed in
+        ensureUserDocumentExists()
+        // Also check the role to update admin UI
+        checkUserRole { role ->
+            binding.adminPanelButton.visibility = if (role == "admin") View.VISIBLE else View.GONE
+        }
     }
 
     private fun updateUI() {
@@ -124,7 +143,11 @@ class ProfileFragment : Fragment() {
     }
 
     private fun ensureUserDocumentExists() {
-        val user = auth.currentUser ?: return
+        val user = auth.currentUser ?: run {
+            Log.d("ProfileFragment", "No user is currently signed in")
+            return
+        }
+        Log.d("ProfileFragment", "Ensuring document exists for UID: ${user.uid}")
         val userDocRef = firestore.collection("users").document(user.uid)
         userDocRef.get().addOnSuccessListener { document ->
             if (!document.exists()) {

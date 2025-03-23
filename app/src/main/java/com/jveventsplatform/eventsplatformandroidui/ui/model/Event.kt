@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Event(
-    val id: Long = 0,
+    val id: Long? = null, // set as nullable; default is null
     val title: String = "",
     val description: String = "",
     val type: String = "",
@@ -19,7 +19,7 @@ data class Event(
     val organiser: Organiser = Organiser()
 ) : Parcelable
 
-fun Event.toMap(): Map<String, Any> {
+fun Event.toMap(): Map<String, Any?> {
     return mapOf(
         "id" to id,
         "title" to title,

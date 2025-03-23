@@ -42,6 +42,11 @@ class HomeFragment : Fragment() {
         return root
     }
 
+    override fun onResume() {
+        super.onResume()
+        fetchEvents() // re-fetch events every time the fragment resumes
+    }
+
     private fun setupRecyclerView() {
         eventAdapter = EventAdapter(eventList) { event ->
             // Handle the event click
@@ -79,7 +84,6 @@ class HomeFragment : Fragment() {
             }
         })
     }
-
 
     private fun setupSearchBar() {
         binding.searchBar.addTextChangedListener(object : TextWatcher {

@@ -23,6 +23,12 @@
             android:hint="Event Description" />
 
         <EditText
+            android:id="@+id/editTextType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Event Type" />
+
+        <EditText
             android:id="@+id/editTextDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,10 +47,59 @@
             android:hint="End Time (HH:mm)" />
 
         <EditText
-            android:id="@+id/editTextLocation"
+            android:id="@+id/editTextPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Event Location" />
+            android:hint="Event Price" />
+
+        <!-- Location Details -->
+        <EditText
+            android:id="@+id/editTextLocationName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Location Name" />
+
+        <EditText
+            android:id="@+id/editTextLocationAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Location Address" />
+
+        <EditText
+            android:id="@+id/editTextLocationCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Location City" />
+
+        <EditText
+            android:id="@+id/editTextLocationPostcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Location Postcode" />
+
+        <!-- Organiser Details -->
+        <EditText
+            android:id="@+id/editTextOrganiserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Organiser Name" />
+
+        <EditText
+            android:id="@+id/editTextOrganiserEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Organiser Email" />
+
+        <EditText
+            android:id="@+id/editTextOrganiserPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Organiser Phone" />
+
+        <!-- Add extra bottom padding so the button isn't obscured -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
 
         <Button
             android:id="@+id/buttonSubmitEvent"
