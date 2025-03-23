@@ -39,17 +39,6 @@ class EventDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set up back button behavior
-        binding.backButton.setOnClickListener {
-            Log.d("EventDetailFragment", "Back button clicked")
-            findNavController().popBackStack()
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                findNavController().popBackStack()
-            }
-        })
-
         // Get event details from arguments
         val event = arguments?.getParcelable<Event>("event")
         event?.let {
