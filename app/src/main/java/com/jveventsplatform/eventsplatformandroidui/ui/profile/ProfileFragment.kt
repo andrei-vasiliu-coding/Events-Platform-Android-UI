@@ -14,6 +14,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.Scope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 import com.jveventsplatform.eventsplatformandroidui.R
 import com.jveventsplatform.eventsplatformandroidui.databinding.FragmentProfileBinding
 
@@ -23,10 +24,12 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var auth: FirebaseAuth
+    private val firestore by lazy { FirebaseFirestore.getInstance() }
     private val RC_SIGN_IN = 1001
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
@@ -36,16 +39,10 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
-
-        // Set click listener for the sign-in button
         binding.signInButton.setOnClickListener {
             signInWithGoogle()
         }
-
-        // Update the UI based on the current sign-in state
         updateUI()
     }
 
@@ -57,18 +54,15 @@ class ProfileFragment : Fragment() {
     private fun updateUI() {
         val user = auth.currentUser
         if (user != null) {
-            // User is signed in, hide the sign-in button and display user's info
             binding.signInButton.visibility = View.GONE
             binding.textProfile.text = "Welcome, ${user.displayName}\nEmail: ${user.email}"
         } else {
-            // No user is signed in, show the sign-in button and prompt the user
             binding.signInButton.visibility = View.VISIBLE
             binding.textProfile.text = "Please sign in"
         }
     }
 
     private fun signInWithGoogle() {
-        // Configure Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
@@ -101,12 +95,35 @@ class ProfileFragment : Fragment() {
                     val user = auth.currentUser
                     Log.d("Firebase Auth", "signInWithCredential:success, user: ${user?.email}")
                     Toast.makeText(requireContext(), "Welcome ${user?.displayName}", Toast.LENGTH_SHORT).show()
+                    // Ensure user document exists in Firestore after successful sign-in
+                    ensureUserDocumentExists()
                 } else {
                     Log.w("Firebase Auth", "signInWithCredential:failure", task.exception)
                     Toast.makeText(requireContext(), "Firebase Authentication failed.", Toast.LENGTH_SHORT).show()
                 }
-                updateUI() // Update the UI after authentication
+                updateUI()
             }
+    }
+
+    private fun ensureUserDocumentExists() {
+        val user = auth.currentUser ?: return
+        val userDocRef = firestore.collection("users").document(user.uid)
+        userDocRef.get().addOnSuccessListener { document ->
+            if (!document.exists()) {
+                val userData = hashMapOf(
+                    "role" to "user",
+                    "email" to user.email,
+                    "displayName" to user.displayName
+                )
+                userDocRef.set(userData)
+                    .addOnSuccessListener {
+                        Log.d("ProfileFragment", "User document created for ${user.uid}")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.e("ProfileFragment", "Error creating user document", e)
+                    }
+            }
+        }
     }
 
     override fun onDestroyView() {
