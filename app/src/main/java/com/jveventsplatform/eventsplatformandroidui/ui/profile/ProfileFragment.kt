@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.Scope
@@ -28,8 +29,7 @@ class ProfileFragment : Fragment() {
     private val RC_SIGN_IN = 1001
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
@@ -40,9 +40,14 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         auth = FirebaseAuth.getInstance()
+
         binding.signInButton.setOnClickListener {
             signInWithGoogle()
         }
+
+        // Check admin role to update the Admin Panel button visibility
+        checkAdminRole()
+
         updateUI()
     }
 
@@ -59,6 +64,7 @@ class ProfileFragment : Fragment() {
         } else {
             binding.signInButton.visibility = View.VISIBLE
             binding.textProfile.text = "Please sign in"
+            binding.adminPanelButton.visibility = View.GONE
         }
     }
 
@@ -95,8 +101,8 @@ class ProfileFragment : Fragment() {
                     val user = auth.currentUser
                     Log.d("Firebase Auth", "signInWithCredential:success, user: ${user?.email}")
                     Toast.makeText(requireContext(), "Welcome ${user?.displayName}", Toast.LENGTH_SHORT).show()
-                    // Ensure user document exists in Firestore after successful sign-in
                     ensureUserDocumentExists()
+                    checkAdminRole() // re-check role after sign-in
                 } else {
                     Log.w("Firebase Auth", "signInWithCredential:failure", task.exception)
                     Toast.makeText(requireContext(), "Firebase Authentication failed.", Toast.LENGTH_SHORT).show()
@@ -124,6 +130,28 @@ class ProfileFragment : Fragment() {
                     }
             }
         }
+    }
+
+    private fun checkAdminRole() {
+        val user = auth.currentUser
+        if (user == null) {
+            binding.adminPanelButton.visibility = View.GONE
+            return
+        }
+        firestore.collection("users").document(user.uid)
+            .get()
+            .addOnSuccessListener { document ->
+                val role = document.getString("role") ?: "user"
+                if (role == "admin") {
+                    binding.adminPanelButton.visibility = View.VISIBLE
+                } else {
+                    binding.adminPanelButton.visibility = View.GONE
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("ProfileFragment", "Error checking admin role", e)
+                binding.adminPanelButton.visibility = View.GONE
+            }
     }
 
     override fun onDestroyView() {
