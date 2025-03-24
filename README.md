@@ -128,7 +128,6 @@ keyPassword=your_key_password
 - [ ] Use tags or categories for faster navigation
 
 ### 🔐 Authentication & Authorization
-- [ ] Implement a visible **sign out** button  
 - [ ] Add better error handling for failed login/signup  
 - [ ] Improve feedback for permission-denied errors
 
@@ -146,6 +145,7 @@ keyPassword=your_key_password
 - [ ] Use **Firebase Test Lab** for automated device testing
 
 ### 🚀 Deployment & Monitoring
+- [ ] Store user IDs and the event IDs they sign up for in a table for more efficient retrieval instead of storing the entire event information with the user ID.
 - [ ] Prepare a signed release and publish to the Play Store  
 - [ ] Use **Firebase Crashlytics** for real-time crash reports  
 
