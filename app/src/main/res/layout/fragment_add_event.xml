@@ -1,113 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:layout_height="match_parent">
 
+    <!-- Scrollable form content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Event Details -->
+            <EditText
+                android:id="@+id/editTextTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Event Title" />
+
+            <EditText
+                android:id="@+id/editTextDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Event Description" />
+
+            <EditText
+                android:id="@+id/editTextType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Event Type" />
+
+            <EditText
+                android:id="@+id/editTextDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Event Date (dd-MM-yyyy)" />
+
+            <EditText
+                android:id="@+id/editTextStartTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Start Time (HH:mm)" />
+
+            <EditText
+                android:id="@+id/editTextEndTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="End Time (HH:mm)" />
+
+            <EditText
+                android:id="@+id/editTextPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Event Price" />
+
+            <!-- Location Details -->
+            <EditText
+                android:id="@+id/editTextLocationName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Location Name" />
+
+            <EditText
+                android:id="@+id/editTextLocationAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Location Address" />
+
+            <EditText
+                android:id="@+id/editTextLocationCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Location City" />
+
+            <EditText
+                android:id="@+id/editTextLocationPostcode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Location Postcode" />
+
+            <!-- Organiser Details -->
+            <EditText
+                android:id="@+id/editTextOrganiserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Organiser Name" />
+
+            <EditText
+                android:id="@+id/editTextOrganiserEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Organiser Email" />
+
+            <EditText
+                android:id="@+id/editTextOrganiserPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Organiser Phone" />
+
+            <!-- Extra bottom padding so fields don't get hidden -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Fixed Button Container (with extra bottom margin to appear above the nav bar) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <EditText
-            android:id="@+id/editTextTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Event Title" />
-
-        <EditText
-            android:id="@+id/editTextDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Event Description" />
-
-        <EditText
-            android:id="@+id/editTextType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Event Type" />
-
-        <EditText
-            android:id="@+id/editTextDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Event Date (dd-MM-yyyy)" />
-
-        <EditText
-            android:id="@+id/editTextStartTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Start Time (HH:mm)" />
-
-        <EditText
-            android:id="@+id/editTextEndTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="End Time (HH:mm)" />
-
-        <EditText
-            android:id="@+id/editTextPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Event Price" />
-
-        <!-- Location Details -->
-        <EditText
-            android:id="@+id/editTextLocationName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Location Name" />
-
-        <EditText
-            android:id="@+id/editTextLocationAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Location Address" />
-
-        <EditText
-            android:id="@+id/editTextLocationCity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Location City" />
-
-        <EditText
-            android:id="@+id/editTextLocationPostcode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Location Postcode" />
-
-        <!-- Organiser Details -->
-        <EditText
-            android:id="@+id/editTextOrganiserName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Organiser Name" />
-
-        <EditText
-            android:id="@+id/editTextOrganiserEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Organiser Email" />
-
-        <EditText
-            android:id="@+id/editTextOrganiserPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Organiser Phone" />
-
-        <!-- Add extra bottom padding so the button isn't obscured -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="16dp" />
-
+        android:gravity="center"
+        android:padding="16dp"
+        android:layout_marginBottom="80dp">
         <Button
             android:id="@+id/buttonSubmitEvent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Event"
-            android:layout_marginTop="24dp"
-            android:layout_gravity="center_horizontal" />
+            android:text="Add Event" />
     </LinearLayout>
-</ScrollView>
+</LinearLayout>
