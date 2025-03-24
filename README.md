@@ -57,7 +57,7 @@ keytool -list -v -keystore <path-to-your-release-keystore.jks> -alias <your-key-
 
 ### 5. Configure the API
 
-- The app relies on a backend REST API. Ensure your API server is running.
+- The app relies on a backend REST API. Ensure your API server is running and that you POST events with Postman, unless you are an admin and can add events throught the application's UI.
 - Update the API base URL in `RetrofitClient.kt` if necessary.
 
 ### 6. Firestore Database
@@ -105,6 +105,49 @@ keyPassword=your_key_password
 ## 🛡 Security Recommendations
 
 - **Never commit sensitive information** (API keys, keystore passwords) to version control. Always use `keystore.properties` or environment variables.
+
+## 🔮 Future Improvements
+
+### 🛠️ Admin Features
+- [ ] Ability for admins to **update** existing events  
+- [ ] Ability for admins to **delete** events  
+- [ ] View a list of users and their roles (e.g., promote/demote users)
+
+### 🎨 UI/UX Enhancements
+- [ ] Redesign **Add Event** form for a cleaner and more modern layout  
+- [ ] Use **DatePicker** and **TimePicker** dialogs instead of manual text input  
+- [ ] Improve spacing, padding, and accessibility  
+- [ ] Add **loading indicators** during long operations (e.g. sign-in, API calls)
+
+### 📅 Google Calendar Integration
+- [ ] Add a toggle for users to choose whether to add events to their calendar  
+- [ ] Show calendar sync confirmation or status
+
+### 🔍 Event Filtering & Search
+- [ ] Add filters by event type, city, price range, etc.  
+- [ ] Use tags or categories for faster navigation
+
+### 🔐 Authentication & Authorization
+- [ ] Implement a visible **sign out** button  
+- [ ] Add better error handling for failed login/signup  
+- [ ] Improve feedback for permission-denied errors
+
+### 📡 Offline Support
+- [ ] Cache event data locally with **Room** or Firestore’s offline persistence  
+- [ ] Support offline event sign-ups and sync them when reconnected
+
+### 📊 Analytics & Notifications
+- [ ] Integrate **Firebase Analytics** to track user behavior  
+- [ ] Add **Firebase Cloud Messaging (FCM)** for event reminders or updates
+
+### 🧪 Testing & QA
+- [ ] Write **unit tests** for critical logic  
+- [ ] Add **instrumentation tests** for UI flow  
+- [ ] Use **Firebase Test Lab** for automated device testing
+
+### 🚀 Deployment & Monitoring
+- [ ] Prepare a signed release and publish to the Play Store  
+- [ ] Use **Firebase Crashlytics** for real-time crash reports  
 
 ## ✅ Checklist for Local Setup
 
