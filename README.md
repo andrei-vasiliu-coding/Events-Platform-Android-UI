@@ -2,6 +2,10 @@
 
 This Android application allows users to browse events, sign up for them and add them to the user's Google calendar. It also includes administrative features for managing events and user roles.
 
+## 🎬 Demo
+
+Watch the demo on [YouTube](https://youtu.be/siAZoIUVVBQ)
+
 ## 🚀 Features
 
 - User authentication via Google Sign-In.
