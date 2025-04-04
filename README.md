@@ -2,6 +2,8 @@
 
 This Android application allows users to browse events, sign up for them and add them to the user's Google calendar. It also includes administrative features for managing events and user roles.
 
+Link to the back-end repository: [Java Events Platform API](https://github.com/andrei-vasiliu-coding/Events-Platform-API) 
+---
 ## 🎬 Demo
 
 Watch the demo on [YouTube](https://youtu.be/siAZoIUVVBQ)
