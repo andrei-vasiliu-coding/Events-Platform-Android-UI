@@ -7,29 +7,23 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <!-- Search Bar -->
-    <LinearLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/searchContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:orientation="horizontal"
-        android:background="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        android:hint="Search events..."
+        app:startIconDrawable="@drawable/ic_search">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/searchBar"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Search events..."
-            android:drawableStart="@drawable/ic_search"
-            android:padding="10dp"
-            android:background="@drawable/search_background"
             android:inputType="text" />
-    </LinearLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Title -->
     <TextView
