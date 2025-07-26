@@ -5,6 +5,15 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/minimalist_people_2"
+        android:scaleType="centerCrop"
+        android:translationY="-80dp"
+        android:alpha="0.4" />
+
     <TextView android:id="@+id/eventTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
