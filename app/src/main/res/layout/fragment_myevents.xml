@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.myevents.MyEventsFragment">
 
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/minimalist_people"
+        android:scaleType="centerCrop"
+        android:translationY="-80dp"
+        android:alpha="0.2" />
+
     <TextView
         android:id="@+id/text_myevents"
         android:layout_width="match_parent"

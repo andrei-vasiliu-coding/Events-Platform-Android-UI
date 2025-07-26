@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +27,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var eventAdapter: EventAdapter
     private var eventList: MutableList<Event> = mutableListOf()
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,11 +37,19 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        progressBar = root.findViewById(R.id.progressBar)
+
+        showLoading(true)
+
         setupRecyclerView()
         fetchEvents()
         setupSearchBar()
 
         return root
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onResume() {
@@ -61,8 +71,11 @@ class HomeFragment : Fragment() {
 
 
     private fun fetchEvents() {
+        showLoading(true)
+
         RetrofitClient.apiService.getEvents().enqueue(object : Callback<List<Event>> {
             override fun onResponse(call: Call<List<Event>>, response: Response<List<Event>>) {
+                showLoading(false)
                 if (response.isSuccessful) {
                     val events = response.body()
                     if (events != null) {
@@ -79,6 +92,7 @@ class HomeFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<List<Event>>, t: Throwable) {
+                showLoading(false)
                 Toast.makeText(requireContext(), "API Error: ${t.message}", Toast.LENGTH_LONG).show()
                 println("API Call Failure: ${t.message}") // Debugging log
             }
