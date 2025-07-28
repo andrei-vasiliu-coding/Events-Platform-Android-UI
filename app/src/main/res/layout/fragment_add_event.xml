@@ -5,6 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/minimalist_people_2_edit"
+        android:scaleType="centerCrop"
+        android:translationY="0dp"
+        android:alpha="0.5" />
+
     <!-- Scrollable form content -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"

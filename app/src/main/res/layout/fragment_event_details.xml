@@ -2,17 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/minimalist_people_2"
+        android:src="@drawable/minimalist_people_2_edit"
         android:scaleType="centerCrop"
-        android:translationY="-80dp"
-        android:alpha="0.4" />
+        android:translationY="0dp"
+        android:alpha="0.5" />
 
     <TextView android:id="@+id/eventTitle"
         android:layout_width="match_parent"

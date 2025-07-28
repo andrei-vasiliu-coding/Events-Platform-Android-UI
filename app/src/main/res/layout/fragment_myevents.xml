@@ -19,7 +19,7 @@
         android:id="@+id/text_myevents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="My Events"
+        android:text=""
         android:textSize="20sp"
         android:textAlignment="center"
         app:layout_constraintTop_toTopOf="parent"
