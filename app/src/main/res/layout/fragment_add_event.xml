@@ -14,7 +14,6 @@
         android:translationY="0dp"
         android:alpha="0.5" />
 
-    <!-- Scrollable form content -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
@@ -28,7 +27,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Event Details -->
             <EditText
                 android:id="@+id/editTextTitle"
                 android:layout_width="match_parent"
@@ -71,7 +69,6 @@
                 android:layout_height="wrap_content"
                 android:hint="Event Price" />
 
-            <!-- Location Details -->
             <EditText
                 android:id="@+id/editTextLocationName"
                 android:layout_width="match_parent"
@@ -96,7 +93,6 @@
                 android:layout_height="wrap_content"
                 android:hint="Location Postcode" />
 
-            <!-- Organiser Details -->
             <EditText
                 android:id="@+id/editTextOrganiserName"
                 android:layout_width="match_parent"
@@ -115,14 +111,12 @@
                 android:layout_height="wrap_content"
                 android:hint="Organiser Phone" />
 
-            <!-- Extra bottom padding so fields don't get hidden -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Fixed Button Container (with extra bottom margin to appear above the nav bar) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

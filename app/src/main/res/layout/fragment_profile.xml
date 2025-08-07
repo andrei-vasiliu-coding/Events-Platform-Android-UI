@@ -15,47 +15,51 @@
         android:scaleType="centerCrop"
         android:paddingTop="70dp"/>
 
-    <!-- Existing TextView for profile information -->
     <TextView
         android:id="@+id/text_profile"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile Info"
+        android:text="Please sign in"
         android:textSize="20sp"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/signInButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/signInButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="24dp" />
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginTop="50dp" />
 
     <Button
         android:id="@+id/signOutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Out"
+        app:layout_constraintTop_toBottomOf="@id/adminPanelButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="200dp" />
+        android:layout_marginBottom="32dp" />
 
     <Button
         android:id="@+id/adminPanelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Admin Panel"
+        app:layout_constraintTop_toBottomOf="@id/signInButton"
         app:layout_constraintBottom_toTopOf="@id/signOutButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="24dp" />
+        android:layout_marginBottom="16dp" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/signInButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign In with Google"
+        app:layout_constraintTop_toBottomOf="@id/text_profile"
         app:layout_constraintBottom_toTopOf="@id/adminPanelButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="24dp" />
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

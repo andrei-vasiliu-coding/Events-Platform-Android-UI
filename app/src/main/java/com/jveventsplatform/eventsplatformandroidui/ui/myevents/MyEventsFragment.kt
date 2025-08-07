@@ -41,12 +41,10 @@ class MyEventsFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        // Set up the adapter with a click listener that navigates to EventDetailFragment
         eventAdapter = EventAdapter(eventList) { event ->
             val bundle = Bundle().apply {
                 putParcelable("event", event)
             }
-            // Navigate to EventDetailFragment using its destination id
             findNavController().navigate(R.id.eventDetailFragment, bundle)
         }
         binding.recyclerViewMyEvents.layoutManager = LinearLayoutManager(requireContext())

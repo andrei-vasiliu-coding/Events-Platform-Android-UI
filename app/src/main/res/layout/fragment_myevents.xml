@@ -27,7 +27,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp" />
 
-    <!-- RecyclerView for displaying the events -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMyEvents"
         android:layout_width="0dp"

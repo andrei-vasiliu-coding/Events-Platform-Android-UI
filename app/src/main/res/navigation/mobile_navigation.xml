@@ -39,7 +39,6 @@
             app:popUpToInclusive="true" />
     </fragment>
 
-    <!-- Admin Panel Fragment -->
     <fragment
         android:id="@+id/adminFragment"
         android:name="com.jveventsplatform.eventsplatformandroidui.ui.admin.AdminFragment"
@@ -50,7 +49,6 @@
             app:destination="@id/addEventFragment" />
     </fragment>
 
-    <!-- Add Event Fragment -->
     <fragment
         android:id="@+id/addEventFragment"
         android:name="com.jveventsplatform.eventsplatformandroidui.ui.admin.AddEventFragment"

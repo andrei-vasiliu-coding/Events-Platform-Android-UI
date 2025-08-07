@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Event(
-    val id: Long? = null, // set as nullable; default is null
+    val id: Long? = null,
     val title: String = "",
     val description: String = "",
     val type: String = "",

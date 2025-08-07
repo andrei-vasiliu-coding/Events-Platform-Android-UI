@@ -54,12 +54,11 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        fetchEvents() // re-fetch events every time the fragment resumes
+        fetchEvents()
     }
 
     private fun setupRecyclerView() {
         eventAdapter = EventAdapter(eventList) { event ->
-            // Handle the event click
             val bundle = Bundle().apply {
                 putParcelable("event", event)
             }
@@ -82,7 +81,7 @@ class HomeFragment : Fragment() {
                         eventList.clear()
                         eventList.addAll(events)
                         eventAdapter.notifyDataSetChanged()
-                        println("API Response: $events") // Debugging log
+                        println("API Response: $events")
                     } else {
                         Toast.makeText(requireContext(), "No events found", Toast.LENGTH_SHORT).show()
                     }
@@ -94,7 +93,7 @@ class HomeFragment : Fragment() {
             override fun onFailure(call: Call<List<Event>>, t: Throwable) {
                 showLoading(false)
                 Toast.makeText(requireContext(), "API Error: ${t.message}", Toast.LENGTH_LONG).show()
-                println("API Call Failure: ${t.message}") // Debugging log
+                println("API Call Failure: ${t.message}")
             }
         })
     }

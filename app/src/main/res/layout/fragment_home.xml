@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <!-- Background Image -->
     <ImageView
         android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
@@ -15,7 +14,6 @@
         android:translationY="-80dp"
         android:alpha="0.2" />
 
-    <!-- Foreground Content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,7 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- Search Bar -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/searchContainer"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -53,7 +50,6 @@
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Title -->
             <TextView
                 android:id="@+id/titleText"
                 android:layout_width="wrap_content"
@@ -76,7 +72,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- RecyclerView -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewEvents"
                 android:layout_width="0dp"

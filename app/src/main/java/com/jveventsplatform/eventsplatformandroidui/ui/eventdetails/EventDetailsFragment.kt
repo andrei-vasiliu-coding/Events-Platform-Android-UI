@@ -25,7 +25,6 @@ class EventDetailFragment : Fragment() {
     private var _binding: FragmentEventDetailsBinding? = null
     private val binding get() = _binding!!
 
-    // Firebase Firestore and Auth instances
     private val firestore: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
     private val auth = FirebaseAuth.getInstance()
 
@@ -39,7 +38,6 @@ class EventDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Get event details from arguments
         val event = arguments?.getParcelable<Event>("event")
         event?.let {
             binding.eventTitle.text = it.title
@@ -51,7 +49,6 @@ class EventDetailFragment : Fragment() {
             binding.eventOrganiser.text = "Organised by: ${it.organiser.name}"
         }
 
-        // Set up the sign-up button to store full event data
         binding.signUpButton.setOnClickListener {
             if (event != null) {
                 signUpForEvent(event)
@@ -75,7 +72,6 @@ class EventDetailFragment : Fragment() {
             Toast.makeText(requireContext(), "Please log in to sign up", Toast.LENGTH_SHORT).show()
             return
         }
-        // Convert the event to a map and add the current user's UID
         val signUpData = event.toMap().toMutableMap()
         signUpData["userId"] = currentUser.uid
 
@@ -91,16 +87,13 @@ class EventDetailFragment : Fragment() {
     }
 
     private fun addEventToCalendar(event: Event) {
-        // Combine the date and time strings from the event into one datetime string.
-        val dateTimeFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault()) //In future use UTC to account for international times
-        val startDateTimeStr = "${event.eventDate} ${event.startTime}" // e.g., "15-11-2025 15:00"
-        val endDateTimeStr = "${event.eventDate} ${event.endTime}"     // e.g., "15-11-2025 16:30"
+        val dateTimeFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
+        val startDateTimeStr = "${event.eventDate} ${event.startTime}"
+        val endDateTimeStr = "${event.eventDate} ${event.endTime}"
 
-        // Parse the strings into Date objects
         val startDate = dateTimeFormat.parse(startDateTimeStr)
         val endDate = dateTimeFormat.parse(endDateTimeStr)
 
-        // Convert to milliseconds. If parsing fails, use current time.
         val startMillis = startDate?.time ?: System.currentTimeMillis()
         val endMillis = endDate?.time ?: System.currentTimeMillis()
 

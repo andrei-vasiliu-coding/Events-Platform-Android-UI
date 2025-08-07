@@ -50,12 +50,9 @@ class ProfileFragment : Fragment() {
             signOut()
         }
 
-        // Set click listener for the admin panel button.
         binding.adminPanelButton.setOnClickListener {
-            // Check the user's role when the button is clicked.
             checkUserRole { role ->
                 if (role == "admin") {
-                    // Navigate to AdminFragment (ensure it's defined in your navigation graph with ID adminFragment)
                     findNavController().navigate(R.id.adminFragment)
                 } else {
                     Toast.makeText(requireContext(), "You are not an admin", Toast.LENGTH_SHORT).show()
@@ -63,7 +60,6 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        // Check the user's role and update the Admin Panel button visibility
         checkUserRole { role ->
             binding.adminPanelButton.visibility =
                 if (role == "admin") View.VISIBLE else View.GONE
@@ -75,9 +71,7 @@ class ProfileFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         updateUI()
-        // Ensure the user document exists even if the user was already signed in
         ensureUserDocumentExists()
-        // Also check the role to update admin UI
         checkUserRole { role ->
             binding.adminPanelButton.visibility = if (role == "admin") View.VISIBLE else View.GONE
         }
@@ -87,9 +81,11 @@ class ProfileFragment : Fragment() {
         val user = auth.currentUser
         if (user != null) {
             binding.signInButton.visibility = View.GONE
+            binding.signOutButton.visibility = View.VISIBLE
             binding.textProfile.text = "Welcome, ${user.displayName}\nEmail: ${user.email}"
         } else {
             binding.signInButton.visibility = View.VISIBLE
+            binding.signOutButton.visibility = View.GONE
             binding.textProfile.text = "Please sign in"
             binding.adminPanelButton.visibility = View.GONE
         }
@@ -129,7 +125,6 @@ class ProfileFragment : Fragment() {
                     Log.d("Firebase Auth", "signInWithCredential: success, user: ${user?.email}")
                     Toast.makeText(requireContext(), "Welcome ${user?.displayName}", Toast.LENGTH_SHORT).show()
                     ensureUserDocumentExists()
-                    // Re-check user role after sign-in
                     checkUserRole { role ->
                         binding.adminPanelButton.visibility =
                             if (role == "admin") View.VISIBLE else View.GONE
@@ -167,7 +162,6 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    // Helper function to check the user's role
     private fun checkUserRole(onRoleFetched: (String) -> Unit) {
         val user = auth.currentUser
         if (user != null) {
@@ -187,17 +181,13 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    // Sign out function to log out the user
     private fun signOut() {
-        // Sign out from Firebase Auth
         auth.signOut()
 
-        // Optionally, sign out from Google as well:
         val googleSignInClient = GoogleSignIn.getClient(requireActivity(),
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build())
         googleSignInClient.signOut()
 
-        // Update the UI after sign-out
         updateUI()
         Toast.makeText(requireContext(), "Signed out", Toast.LENGTH_SHORT).show()
     }

@@ -10,10 +10,9 @@ import com.jveventsplatform.eventsplatformandroidui.ui.model.Event
 
 class EventAdapter(
     private var eventList: List<Event>,
-    private val onEventClick: (Event) -> Unit // Callback for item clicks
+    private val onEventClick: (Event) -> Unit
 ) : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
-    // ViewHolder: Defines how a single item looks
     class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val eventTitle: TextView = itemView.findViewById(R.id.eventTitle)
         val eventDate: TextView = itemView.findViewById(R.id.eventDate)
@@ -30,7 +29,6 @@ class EventAdapter(
         holder.eventTitle.text = event.title
         holder.eventDate.text = event.eventDate
 
-        // Set the click listener for the item
         holder.itemView.setOnClickListener {
             onEventClick(event)
         }
@@ -38,7 +36,6 @@ class EventAdapter(
 
     override fun getItemCount(): Int = eventList.size
 
-    // Function to update the list when filtering
     fun updateList(newList: List<Event>) {
         eventList = newList
         notifyDataSetChanged()

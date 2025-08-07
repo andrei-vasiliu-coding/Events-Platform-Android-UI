@@ -25,7 +25,6 @@ class AdminFragment : Fragment() {
         val updateButton: Button = view.findViewById(R.id.buttonUpdateRole)
         val addEventButton: Button = view.findViewById(R.id.buttonAddEvent)
 
-        // Listener to update a user's role
         updateButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
             if (email.isNotEmpty()) {
@@ -35,9 +34,7 @@ class AdminFragment : Fragment() {
             }
         }
 
-        // Listener for the Add Event button - navigates to the AddEventFragment
         addEventButton.setOnClickListener {
-            // Navigate to AddEventFragment (make sure it's defined in your navigation graph)
             findNavController().navigate(R.id.action_admin_to_addEvent)
         }
 

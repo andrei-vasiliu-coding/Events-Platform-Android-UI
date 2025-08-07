@@ -21,7 +21,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    // Load signing configs from keystore.properties
     val keystorePropertiesFile = rootProject.file("keystore.properties")
     val keystoreProperties = Properties()
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
@@ -37,7 +36,7 @@ android {
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release") // <-- Add this line
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -74,7 +73,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    // Retrofit & Gson (Now using Version Catalog)
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.gson)
