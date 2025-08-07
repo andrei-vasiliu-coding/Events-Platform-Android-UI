@@ -20,14 +20,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Please sign in"
+        android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
         android:textSize="20sp"
+        android:textStyle="bold"
         android:textAlignment="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/signInButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="200dp" />
 
     <Button
         android:id="@+id/signOutButton"
@@ -49,7 +51,8 @@
         app:layout_constraintBottom_toTopOf="@id/signOutButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"/>
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/signInButton"
