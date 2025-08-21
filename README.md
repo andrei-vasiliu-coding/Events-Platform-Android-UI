@@ -7,19 +7,24 @@ Link to the back-end repository: [Java Events Platform API](https://github.com/a
 
 ## The application in action
 
-### ![Home screen with events](app_demo_gifs/home_screen_gif.gif)
+### Home screen with events
+<img src="app_demo_gifs/home_screen_gif.gif" width="200"/>
 
 ### Search bar
+<img src="app_demo_gifs/search_bar_gif.gif" width="200"/>
 
 ### Sign in with Google
+<img src="app_demo_gifs/Google_sign_in_gif.gif" width="200"/>
 
 ### Sign up for event
+<img src="app_demo_gifs/sign_up_event_gif.gif" width="200"/>
 
 ### Add event to Google Calendar
+<img src="app_demo_gifs/add_to_Google_Calendar_gif.gif" width="200"/>
 
 ## 🎬 Demo
 
-Watch the demo on [YouTube](https://youtu.be/okMye-cVr7A)
+Watch the full demo on [YouTube](https://youtu.be/okMye-cVr7A).
 
 ## 🚀 Features
 
@@ -128,49 +133,45 @@ keyPassword=your_key_password
 ## 🔮 Future Improvements
 
 ### 🛠️ Admin Features
-- [ ] Ability for admins to **update** existing events  
-- [ ] Ability for admins to **delete** events  
-- [ ] View a list of users and their roles (e.g., promote/demote users)
+- Ability for admins to **update** existing events  
+- Ability for admins to **delete** events  
+- View a list of users and their roles (e.g., promote/demote users)
 
 ### 🎨 UI/UX Enhancements
-- [ ] Redesign **Add Event** form for a cleaner and more modern layout  
-- [ ] Use **DatePicker** and **TimePicker** dialogs instead of manual text input  
-- [ ] Improve spacing, padding, and accessibility  
-- [ ] Add **loading indicators** during long operations (e.g. sign-in, API calls)
+- Redesign **Add Event** form for a cleaner and more modern layout  
+- Use **DatePicker** and **TimePicker** dialogs instead of manual text input  
+- Improve spacing, padding, and accessibility  
+- Add **loading indicators** during long operations (e.g. sign-in, API calls)
 
 ### 📅 Google Calendar Integration
-- [ ] Add a toggle for users to choose whether to add events to their calendar  
-- [ ] Show calendar sync confirmation or status
+- Add a toggle for users to choose whether to add events to their calendar  
+- Show calendar sync confirmation or status
 
 ### 🔍 Event Filtering & Search
-- [ ] Add filters by event type, city, price range, etc.  
-- [ ] Use tags or categories for faster navigation
+- Add filters by event type, city, price range, etc.  
+- Use tags or categories for faster navigation
 
 ### 🔐 Authentication & Authorization
-- [ ] Add better error handling for failed login/signup  
-- [ ] Improve feedback for permission-denied errors
+- Add better error handling for failed login/signup  
+- Improve feedback for permission-denied errors
 
 ### 📡 Offline Support
-- [ ] Cache event data locally with **Room** or Firestore’s offline persistence  
-- [ ] Support offline event sign-ups and sync them when reconnected
+- Cache event data locally with **Room** or Firestore’s offline persistence  
+- Support offline event sign-ups and sync them when reconnected
 
 ### 📊 Analytics & Notifications
-- [ ] Integrate **Firebase Analytics** to track user behavior  
-- [ ] Add **Firebase Cloud Messaging (FCM)** for event reminders or updates
+- Integrate **Firebase Analytics** to track user behavior  
+- Add **Firebase Cloud Messaging (FCM)** for event reminders or updates
 
 ### 🧪 Testing & QA
-- [ ] Write **unit tests** for critical logic  
-- [ ] Add **instrumentation tests** for UI flow  
-- [ ] Use **Firebase Test Lab** for automated device testing
+- Write **unit tests** for critical logic  
+- Add **instrumentation tests** for UI flow  
+- Use **Firebase Test Lab** for automated device testing
 
 ### 🚀 Deployment & Monitoring
-- [ ] Store user IDs and the event IDs they sign up for in a table for more efficient retrieval instead of storing the entire event information with the user ID.
-- [ ] Prepare a signed release and publish to the Play Store  
-- [ ] Use **Firebase Crashlytics** for real-time crash reports  
-
-## ✅ Checklist for Local Setup
-
--
+- Store user IDs and the event IDs they sign up for in a table for more efficient retrieval instead of storing the entire event information with the user ID.
+- Prepare a signed release and publish to the Play Store  
+- Use **Firebase Crashlytics** for real-time crash reports  
 
 ## 📖 Helpful Documentation
 
@@ -184,5 +185,6 @@ Contributions are welcome! Please fork the repository and submit a pull request.
 ## 📝 License
 
 This project is licensed under the MIT License.
+
 
 
