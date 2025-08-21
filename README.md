@@ -8,19 +8,19 @@ Link to the back-end repository: [Java Events Platform API](https://github.com/a
 ## The application in action
 
 ### Home screen with events
-<img src="app_demo_gifs/home_screen_gif.gif" width="300"/>
+<img src="app_demo_gifs/home_screen_gif.gif" width="290"/>
 
 ### Search bar
-<img src="app_demo_gifs/search_bar_gif.gif" width="200"/>
+<img src="app_demo_gifs/search_bar_gif.gif" width="290"/>
 
 ### Sign in with Google
-<img src="app_demo_gifs/Google_sign_in_gif.gif" width="200"/>
+<img src="app_demo_gifs/Google_sign_in_gif.gif" width="290"/>
 
 ### Sign up for event
-<img src="app_demo_gifs/sign_up_event_gif.gif" width="200"/>
+<img src="app_demo_gifs/sign_up_event_gif.gif" width="290"/>
 
 ### Add event to Google Calendar
-<img src="app_demo_gifs/add_to_Google_Calendar_gif.gif" width="200"/>
+<img src="app_demo_gifs/add_to_Google_Calendar_gif.gif" width="290"/>
 
 ## 🎬 Demo
 
@@ -185,6 +185,7 @@ Contributions are welcome! Please fork the repository and submit a pull request.
 ## 📝 License
 
 This project is licensed under the MIT License.
+
 
 
 
