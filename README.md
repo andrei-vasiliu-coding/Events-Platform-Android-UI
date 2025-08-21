@@ -4,9 +4,22 @@ This Android application allows users to browse events, sign up for them and add
 
 Link to the back-end repository: [Java Events Platform API](https://github.com/andrei-vasiliu-coding/Events-Platform-API) 
 ---
+
+## The application in action
+
+### ![Home screen with events](app_demo_gifs/home_screen_gif.gif)
+
+### Search bar
+
+### Sign in with Google
+
+### Sign up for event
+
+### Add event to Google Calendar
+
 ## 🎬 Demo
 
-Watch the demo on [YouTube](https://youtu.be/siAZoIUVVBQ)
+Watch the demo on [YouTube](https://youtu.be/okMye-cVr7A)
 
 ## 🚀 Features
 
@@ -171,4 +184,5 @@ Contributions are welcome! Please fork the repository and submit a pull request.
 ## 📝 License
 
 This project is licensed under the MIT License.
+
 
